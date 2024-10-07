@@ -12,33 +12,38 @@ import { useToast } from "@/components/ui/use-toast"
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [message, setMessage] = useState<string | null>(null);  // Track success/error message
   const { toast } = useToast()
   const formRef = useRef<HTMLFormElement>(null)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setIsSubmitting(true)
+    event.preventDefault();
+    setIsSubmitting(true);
 
-    const formData = new FormData(event.currentTarget)
-    const result = await sendEmail(formData)
+    const formData = new FormData(event.currentTarget);
+    const result = await sendEmail(formData);
 
-    setIsSubmitting(false)
+    setIsSubmitting(false);
 
     if (result.success) {
-      // Display a toast message at the top of the form
+      setMessage("Message sent successfully. Thank you!");  // Set success message
       toast({
         title: "Message Sent",
         description: "Thank you for your message. We'll get back to you soon!",
-      })
-      formRef.current?.reset()
+      });
+      formRef.current?.reset(); // Reset form
     } else {
+      setMessage("There was a problem sending your message. Please try again.");  // Set error message
       toast({
         title: "Error",
         description: "There was a problem sending your message. Please try again.",
         variant: "destructive",
-      })
+      });
     }
-  }
+
+    // Clear the message after 5 seconds
+    setTimeout(() => setMessage(null), 5000);
+  };
 
   return (
     <section id="contact" className="py-5">
@@ -112,6 +117,15 @@ export default function Contact() {
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
+
+                {/* Render message below the form */}
+                {message && (
+                  <div className="mt-4 text-center">
+                    <p className={message.includes("successfully") ? "text-green-600" : "text-red-600"}>
+                      {message}
+                    </p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </motion.div>
