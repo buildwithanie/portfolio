@@ -18,7 +18,7 @@ const projects: Project[] = [
     image: '/images/work-1.png',
   },
   {
-    title: 'Hypertension Assistant',
+    title: 'Hypertension Assistant Bot',
     description: 'An AI-powered chatbot application helping hypertension patients monitor their condition.',
     image: '/images/work-2.png',
   },
