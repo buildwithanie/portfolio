@@ -17,7 +17,7 @@ const menuItems: MenuItem[] = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Services', href: '#services' },
-  { name: 'Work', href: '#work' },
+ {name:'Work',href:'#work'},
   { name: 'Contact', href: '#contact' }
 ]
 
@@ -136,7 +136,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center md:text-left md:flex-1"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-5 text-primary">
+            <h1 className="text-3xl md:text-5xl font-bold mb-3 text-primary">
               Welcome to My Portfolio
             </h1>
 
@@ -145,12 +145,13 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-              <Button size="lg" className="group">
-                <Link href="#work" className="inline-flex items-center">
-                  View My Work
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
+            <Button size="lg" className="group">
+  <Link href="#contact" className="inline-flex items-center">
+    Get in Touch
+    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+  </Link>
+</Button>
+
             </div>
           </motion.div>
         </div>
