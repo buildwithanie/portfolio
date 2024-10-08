@@ -30,9 +30,9 @@ const projects: Project[] = [
 
 export default function Work() {
   return (
-    <section className="py-16 bg-gradient-to-br from-primary/20 to-background">
+    <section id="work" className="py-16 bg-gradient-to-br from-primary/20 to-background">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text text-white mb-4">Work</h2>
+        <h2 className="text-4xl font-bold text-center text-white mb-4">Work</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={index} {...project} />
@@ -42,6 +42,7 @@ export default function Work() {
     </section>
   )
 }
+
 
 function ProjectCard({ title, description, image }: Project) {
   const [isHovered, setIsHovered] = useState(false)
