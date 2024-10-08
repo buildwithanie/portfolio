@@ -46,7 +46,7 @@ export default function Work() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -55,11 +55,11 @@ export default function Work() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card 
-                className="group h-[700px] relative overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                className="group h-[400px] md:h-[500px] lg:h-[700px] relative overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="absolute inset-0 w-full h-[800px]">
+                <div className="absolute inset-0 w-full h-full">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -75,7 +75,7 @@ export default function Work() {
                 </div>
 
                 <CardContent className="relative h-full flex flex-col justify-end p-6 z-10">
-                  <h3 className="text-2xl font-bold mb-3 text-white">{project.title}</h3>
+                  <h3 className="text-lg md:text-2xl font-bold mb-3 text-white">{project.title}</h3>
                   <motion.p
                     className={`text-gray-200 mb-4 transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-0' : 'opacity-0'}`} // Keep it hidden
                   >

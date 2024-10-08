@@ -1,13 +1,23 @@
 'use server'
 
-import { Resend } from 'resend'
+import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend with the API key from environment variables
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendEmail(formData: FormData) {
-  const name = formData.get('name') as string
-  const email = formData.get('email') as string
-  const message = formData.get('message') as string
+// Define a type for the expected response
+interface EmailResponse {
+  success: boolean;
+  message: string;
+}
+
+// Define the function to send an email
+export async function sendEmail(formData: FormData): Promise<EmailResponse> {
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  const message = formData.get('message') as string;
+
+  console.log('Attempting to send email:', { name, email, message });  // Debugging output
 
   try {
     await resend.emails.send({
@@ -19,11 +29,17 @@ export async function sendEmail(formData: FormData) {
         Email: ${email}
         Message: ${message}
       `,
-    })
+    });
 
-    return { success: true, message: 'Email sent successfully' }
-  } catch (error) {
-    console.error(error)
-    return { success: false, message: 'Failed to send email' }
+    return { success: true, message: 'Email sent successfully' };
+  } catch (error: unknown) {  // Use unknown instead of any
+    // Check if the error has a message and log it accordingly
+    if (error instanceof Error) {
+      console.error('Error sending email:', error.message);
+    } else {
+      console.error('Error sending email:', error);
+    }
+
+    return { success: false, message: 'Failed to send email' };
   }
 }
