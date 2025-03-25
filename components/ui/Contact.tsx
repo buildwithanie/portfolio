@@ -1,14 +1,12 @@
 "use client"
 
 import type React from "react"
-
 import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Mail, FileText, MapPin } from "lucide-react"
-import { sendEmail } from "./actions"
 import { useState, useRef } from "react"
 import { useToast } from "@/components/ui/use-toast"
 
@@ -23,27 +21,37 @@ export default function Contact() {
     setIsSubmitting(true)
 
     const formData = new FormData(event.currentTarget)
-    const result = await sendEmail(formData)
-
-    setIsSubmitting(false)
-
-    if (result.success) {
-      setMessage("Message sent successfully. Thank you!")
-      toast({
-        title: "Message Sent",
-        description: "Thank you for your message. We'll get back to you soon!",
+    
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        body: formData,
       })
-      formRef.current?.reset() // Reset form
-    } else {
+      
+      const result = await response.json()
+
+      setIsSubmitting(false)
+
+      if (result.success) {
+        setMessage("Message sent successfully. Thank you!")
+        toast({
+          title: "Message Sent",
+          description: "Thank you for your message. We'll get back to you soon!",
+        })
+        formRef.current?.reset()
+      } else {
+        throw new Error(result.error || result.message)
+      }
+    } catch (error) {
+      setIsSubmitting(false)
       setMessage("There was a problem sending your message. Please try again.")
       toast({
         title: "Error",
-        description: result.error || result.message || "There was a problem sending your message. Please try again.",
+        description: error instanceof Error ? error.message : "There was a problem sending your message. Please try again.",
         variant: "destructive",
       })
     }
 
-    // Clear the message after 5 seconds
     setTimeout(() => setMessage(null), 5000)
   }
 
@@ -125,7 +133,6 @@ export default function Contact() {
                   </Button>
                 </form>
 
-                {/* Render message below the form */}
                 {message && (
                   <div className="mt-4 text-center">
                     <p className={message.includes("successfully") ? "text-green-600" : "text-red-600"}>{message}</p>
@@ -139,4 +146,3 @@ export default function Contact() {
     </section>
   )
 }
-
