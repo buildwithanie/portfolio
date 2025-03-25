@@ -61,7 +61,7 @@ function ProjectCard({ title, description, image }: Project) {
         alt={title}
         width={600}
         height={400}
-        className="w-full h-auto"
+        className="w-90 h-55"
       />
       <motion.div
         className="absolute inset-0 bg-red-600 bg-opacity-80"

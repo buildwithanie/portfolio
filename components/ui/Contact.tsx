@@ -1,49 +1,51 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
-import { Mail, FileText, MapPin } from 'lucide-react'
-import { sendEmail } from './actions'
-import { useState, useRef } from 'react'
+import type React from "react"
+
+import { motion } from "framer-motion"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { Mail, FileText, MapPin } from "lucide-react"
+import { sendEmail } from "./actions"
+import { useState, useRef } from "react"
 import { useToast } from "@/components/ui/use-toast"
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [message, setMessage] = useState<string | null>(null);  // Track success/error message
+  const [message, setMessage] = useState<string | null>(null)
   const { toast } = useToast()
   const formRef = useRef<HTMLFormElement>(null)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
+    event.preventDefault()
+    setIsSubmitting(true)
 
-    const formData = new FormData(event.currentTarget);
-    const result = await sendEmail(formData);
+    const formData = new FormData(event.currentTarget)
+    const result = await sendEmail(formData)
 
-    setIsSubmitting(false);
+    setIsSubmitting(false)
 
     if (result.success) {
-      setMessage("Message sent successfully. Thank you!");  // Set success message
+      setMessage("Message sent successfully. Thank you!")
       toast({
         title: "Message Sent",
         description: "Thank you for your message. We'll get back to you soon!",
-      });
-      formRef.current?.reset(); // Reset form
+      })
+      formRef.current?.reset() // Reset form
     } else {
-      setMessage("There was a problem sending your message. Please try again.");  // Set error message
+      setMessage("There was a problem sending your message. Please try again.")
       toast({
         title: "Error",
-        description: "There was a problem sending your message. Please try again.",
+        description: result.error || result.message || "There was a problem sending your message. Please try again.",
         variant: "destructive",
-      });
+      })
     }
 
     // Clear the message after 5 seconds
-    setTimeout(() => setMessage(null), 5000);
-  };
+    setTimeout(() => setMessage(null), 5000)
+  }
 
   return (
     <section id="contact" className="py-5">
@@ -83,7 +85,12 @@ export default function Contact() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <FileText className="text-primary" />
-                  <a href="/images/CV.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  <a
+                    href="/images/CV.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
                     Download CV
                   </a>
                 </div>
@@ -114,16 +121,14 @@ export default function Contact() {
                     <Textarea name="message" placeholder="Your Message" required />
                   </div>
                   <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
 
                 {/* Render message below the form */}
                 {message && (
                   <div className="mt-4 text-center">
-                    <p className={message.includes("successfully") ? "text-green-600" : "text-red-600"}>
-                      {message}
-                    </p>
+                    <p className={message.includes("successfully") ? "text-green-600" : "text-red-600"}>{message}</p>
                   </div>
                 )}
               </CardContent>
@@ -134,3 +139,4 @@ export default function Contact() {
     </section>
   )
 }
+
