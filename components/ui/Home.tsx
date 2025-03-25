@@ -123,7 +123,7 @@ export default function Home() {
             }}
           >
             <Image
-              src="/images/background.png?height=600&width=600"
+              src="/images/background.png?height=500&width=500"
               alt="Profile picture"
               fill
               sizes="(max-width: 768px) 256px, 384px"
@@ -136,19 +136,26 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center md:text-left md:flex-1"
           >
-            <h1 className="text-3xl md:text-5xl font-bold mb-3 text-primary">
+            <h1 className="text-3xl md:text-5xl font-bold mb-10 text-primary">
               Welcome to My Portfolio
             </h1>
 
-            <p className="text-lg md:text-xl mb-6 text-muted-foreground">
-              I&apos;m a passionate web developer creating amazing digital experiences.
+            <p className="text-lg md:text-xl mb-6 text-white-600 font-serif"
+               style={{
+                 textAlign: 'justify',        // Aligned text
+                 color: '#ffffff',           // Custom blue color
+                 fontSize: '1.25rem',        // 20px font size
+                 fontStyle: 'italic',        // Italic style
+                 lineHeight: '2.0',         // Improved readability
+               }}>
+             Hello there 👋! I&apos;m Ann Githinji, a passionate web and Android mobile application developer dedicated to crafting innovative, user-friendly digital experiences. Known for my attention to detail and ability to tackle complex challenges, I specialize in Kotlin and Next.js. Let&apos;s build something amazing together—feel free to connect! 🚀
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start">
             <Button size="lg" className="group">
   <Link href="#contact" className="inline-flex items-center">
     Get in Touch
-    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+    <ArrowRight className="ml-5 h-5 w-5 transition-transform group-hover:translate-x-1" />
   </Link>
 </Button>
 
