@@ -17,7 +17,7 @@ const menuItems: MenuItem[] = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Services', href: '#services' },
- {name:'Work',href:'#work'},
+  { name: 'Work', href: '#work' },
   { name: 'Contact', href: '#contact' }
 ]
 
@@ -39,8 +39,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
+    <div className="min-h-screen transition-colors duration-200 bg-background">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <Link href="#home" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-xl relative overflow-hidden">
@@ -63,7 +63,7 @@ export default function Home() {
                 </text>
               </svg>
             </div>
-            <span className="text-xl font-semibold">Ann</span>
+            <span className="text-xl font-semibold text-foreground">Ann</span>
           </Link>
           <nav className="hidden md:flex md:space-x-4">
             {menuItems.map((item) => (
@@ -78,20 +78,22 @@ export default function Home() {
           </nav>
           <div className="relative flex items-center space-x-3">
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {mounted && (theme === 'dark' ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              ))}
+              {mounted ? (
+                theme === 'dark' ? (
+                  <Sun className="h-5 w-5 text-foreground" />
+                ) : (
+                  <Moon className="h-5 w-5 text-foreground" />
+                )
+              ) : null}
               <span className="sr-only">Toggle theme</span>
             </Button>
             <Button variant="ghost" size="icon" onClick={toggleMenu} className="md:hidden">
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6 text-foreground" />
             </Button>
           </div>
         </div>
         {isMenuOpen && (
-          <nav className="md:hidden absolute right-0 top-14 bg-background shadow-md rounded-md p-3">
+          <nav className="md:hidden absolute right-0 top-14 bg-background shadow-md rounded-md p-3 border border-border">
             <div className="flex flex-col space-y-3">
               {menuItems.map((item) => (
                 <Link
@@ -108,7 +110,7 @@ export default function Home() {
         )}
       </header>
 
-      <section id="home" className="min-h-screen flex items-center justify-center pt-16 md:pt-0">
+      <section id="home" className="min-h-screen flex items-center justify-center pt-16 md:pt-0 bg-background">
         <div className="container px-4 flex flex-col md:flex-row items-center justify-center">
           <motion.div
             className="relative w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-primary shadow-lg mb-8 md:mb-0 md:mr-12"
@@ -140,25 +142,25 @@ export default function Home() {
               Welcome to My Portfolio
             </h1>
 
-            <p className="text-lg md:text-xl mb-6 text-white-600 font-serif"
-               style={{
-                 textAlign: 'justify',        // Aligned text
-                 color: '#ffffff',           // Custom blue color
-                 fontSize: '1.25rem',        // 20px font size
-                 fontStyle: 'italic',        // Italic style
-                 lineHeight: '2.0',         // Improved readability
-               }}>
-             Hello there 👋! I&apos;m Ann Githinji, a passionate web and Android mobile application developer dedicated to crafting innovative, user-friendly digital experiences. Known for my attention to detail and ability to tackle complex challenges, I specialize in Kotlin and Next.js. Let&apos;s build something amazing together—feel free to connect! 🚀
+            <p 
+              className="text-lg md:text-xl mb-6 font-serif text-foreground"
+              style={{
+                textAlign: 'justify',
+                fontSize: '1.25rem',
+                fontStyle: 'italic',
+                lineHeight: '2.0',
+              }}
+            >
+              Hello there 👋! I&apos;m Ann Githinji, a passionate web and Android mobile application developer dedicated to crafting innovative, user-friendly digital experiences. Known for my attention to detail and ability to tackle complex challenges, I specialize in Kotlin and Next.js. Let&apos;s build something amazing together—feel free to connect! 🚀
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start">
-            <Button size="lg" className="group">
-  <Link href="#contact" className="inline-flex items-center">
-    Get in Touch
-    <ArrowRight className="ml-5 h-5 w-5 transition-transform group-hover:translate-x-1" />
-  </Link>
-</Button>
-
+              <Button size="lg" className="group">
+                <Link href="#contact" className="inline-flex items-center">
+                  Get in Touch
+                  <ArrowRight className="ml-5 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
             </div>
           </motion.div>
         </div>
