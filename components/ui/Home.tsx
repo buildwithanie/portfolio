@@ -40,75 +40,75 @@ export default function Home() {
 
   return (
     <div className="min-h-screen transition-colors duration-200 bg-background">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link href="#home" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-xl relative overflow-hidden">
-              <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
-                <path
-                  d="M50 10 L90 90 L10 90 Z"
-                  fill="currentColor"
-                  className="text-primary-foreground"
-                />
-                <text
-                  x="50"
-                  y="70"
-                  fontSize="50"
-                  fontWeight="bold"
-                  textAnchor="middle"
-                  fill="currentColor"
-                  className="text-primary"
-                >
-                  A
-                </text>
-              </svg>
-            </div>
-            <span className="text-xl font-semibold text-foreground">Ann</span>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-sm border-b border-border">
+  <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <Link href="#home" className="flex items-center space-x-2">
+      <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-xl relative overflow-hidden">
+        <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
+          <path
+            d="M50 10 L90 90 L10 90 Z"
+            fill="currentColor"
+            className="text-primary-foreground"
+          />
+          <text
+            x="50"
+            y="70"
+            fontSize="50"
+            fontWeight="bold"
+            textAnchor="middle"
+            fill="currentColor"
+            className="text-primary"
+          >
+            A
+          </text>
+        </svg>
+      </div>
+      <span className="text-xl font-semibold text-foreground">Ann</span>
+    </Link>
+    <nav className="hidden md:flex md:space-x-4">
+      {menuItems.map((item) => (
+        <Link
+          key={item.name}
+          href={item.href}
+          className="text-foreground/80 hover:text-primary transition-colors"
+        >
+          {item.name}
+        </Link>
+      ))}
+    </nav>
+    <div className="relative flex items-center space-x-3">
+      <Button variant="ghost" size="icon" onClick={toggleTheme}>
+        {mounted ? (
+          theme === 'dark' ? (
+            <Sun className="h-5 w-5 text-foreground" />
+          ) : (
+            <Moon className="h-5 w-5 text-foreground" />
+          )
+        ) : null}
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+      <Button variant="ghost" size="icon" onClick={toggleMenu} className="md:hidden">
+        <Menu className="h-6 w-6 text-foreground" />
+      </Button>
+    </div>
+  </div>
+  {isMenuOpen && (
+    <nav className="md:hidden absolute right-0 top-14 bg-background shadow-md rounded-md p-3 border border-border">
+      <div className="flex flex-col space-y-3">
+        {menuItems.map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className="text-foreground/80 hover:text-primary transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {item.name}
           </Link>
-          <nav className="hidden md:flex md:space-x-4">
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-          <div className="relative flex items-center space-x-3">
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {mounted ? (
-                theme === 'dark' ? (
-                  <Sun className="h-5 w-5 text-foreground" />
-                ) : (
-                  <Moon className="h-5 w-5 text-foreground" />
-                )
-              ) : null}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-            <Button variant="ghost" size="icon" onClick={toggleMenu} className="md:hidden">
-              <Menu className="h-6 w-6 text-foreground" />
-            </Button>
-          </div>
-        </div>
-        {isMenuOpen && (
-          <nav className="md:hidden absolute right-0 top-14 bg-background shadow-md rounded-md p-3 border border-border">
-            <div className="flex flex-col space-y-3">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-foreground/80 hover:text-primary transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </nav>
-        )}
-      </header>
+        ))}
+      </div>
+    </nav>
+  )}
+</header>
 
       <section id="home" className="min-h-screen flex items-center justify-center pt-16 md:pt-0 bg-background">
         <div className="container px-4 flex flex-col md:flex-row items-center justify-center">
@@ -125,10 +125,10 @@ export default function Home() {
             }}
           >
             <Image
-              src="/images/background.png?height=500&width=500"
+              src="/images/background.png?height=300&width=400"
               alt="Profile picture"
               fill
-              sizes="(max-width: 768px) 256px, 384px"
+              sizes="(max-width: 500px) 254px, 350px"
               className="object-cover"
             />
           </motion.div>
@@ -154,7 +154,7 @@ export default function Home() {
               Hello there 👋! I&apos;m Ann Githinji, a passionate web and Android mobile application developer dedicated to crafting innovative, user-friendly digital experiences. Known for my attention to detail and ability to tackle complex challenges, I specialize in Kotlin and Next.js. Let&apos;s build something amazing together—feel free to connect! 🚀
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row gap-2 justify-center md:justify-start">
               <Button size="lg" className="group">
                 <Link href="#contact" className="inline-flex items-center">
                   Get in Touch
