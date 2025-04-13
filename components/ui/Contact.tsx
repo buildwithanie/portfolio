@@ -83,8 +83,8 @@ export default function Contact() {
               <CardContent className="space-y-4">
                 <div className="flex items-center space-x-2">
                   <Mail className="text-primary" />
-                  <a href="mailto:agithinji020@gmail.com" className="text-primary hover:underline">
-                    agithinji020@gmail.com
+                  <a href="mailto:buildwithannie@gmail.com" className="text-primary hover:underline">
+                    buildwithannie@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center space-x-2">
