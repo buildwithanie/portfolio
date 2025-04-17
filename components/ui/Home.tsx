@@ -1,24 +1,24 @@
 "use client"
 
-import { motion } from 'framer-motion'
-import { ArrowRight, Menu, Moon, Sun } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useTheme } from 'next-themes'
-import { useState, useEffect } from 'react'
+import { motion } from "framer-motion"
+import { ArrowRight, Menu, Moon, Sun } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import Link from "next/link"
+import { useTheme } from "next-themes"
+import { useState, useEffect } from "react"
 
 interface MenuItem {
-  name: string;
-  href: string;
+  name: string
+  href: string
 }
 
 const menuItems: MenuItem[] = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Work', href: '#work' },
-  { name: 'Contact', href: '#contact' }
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Work", href: "#work" },
+  { name: "Contact", href: "#contact" },
 ]
 
 export default function Home() {
@@ -31,7 +31,7 @@ export default function Home() {
   }, [])
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    setTheme(theme === "dark" ? "light" : "dark")
   }
 
   const toggleMenu = () => {
@@ -41,74 +41,67 @@ export default function Home() {
   return (
     <div className="min-h-screen transition-colors duration-200 bg-background">
       <header className="fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-sm border-b border-border">
-  <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-    <Link href="#home" className="flex items-center space-x-2">
-      <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-xl relative overflow-hidden">
-        <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
-          <path
-            d="M50 10 L90 90 L10 90 Z"
-            fill="currentColor"
-            className="text-primary-foreground"
-          />
-          <text
-            x="50"
-            y="70"
-            fontSize="50"
-            fontWeight="bold"
-            textAnchor="middle"
-            fill="currentColor"
-            className="text-primary"
-          >
-            A
-          </text>
-        </svg>
-      </div>
-      <span className="text-xl font-semibold text-foreground">Ann</span>
-    </Link>
-    <nav className="hidden md:flex md:space-x-4">
-      {menuItems.map((item) => (
-        <Link
-          key={item.name}
-          href={item.href}
-          className="text-foreground/80 hover:text-primary transition-colors"
-        >
-          {item.name}
-        </Link>
-      ))}
-    </nav>
-    <div className="relative flex items-center space-x-3">
-      <Button variant="ghost" size="icon" onClick={toggleTheme}>
-        {mounted ? (
-          theme === 'dark' ? (
-            <Sun className="h-5 w-5 text-foreground" />
-          ) : (
-            <Moon className="h-5 w-5 text-foreground" />
-          )
-        ) : null}
-        <span className="sr-only">Toggle theme</span>
-      </Button>
-      <Button variant="ghost" size="icon" onClick={toggleMenu} className="md:hidden">
-        <Menu className="h-6 w-6 text-foreground" />
-      </Button>
-    </div>
-  </div>
-  {isMenuOpen && (
-    <nav className="md:hidden absolute right-0 top-14 bg-background shadow-md rounded-md p-3 border border-border">
-      <div className="flex flex-col space-y-3">
-        {menuItems.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            className="text-foreground/80 hover:text-primary transition-colors"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {item.name}
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <Link href="#home" className="flex items-center space-x-3">
+            {/* Enhanced AG Logo with background */}
+            <div className="w-12 h-12 relative rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-gray-900 to-black shadow-lg border border-gray-700">
+              <div className="w-10 h-10 relative flex items-center justify-center">
+                <Image
+                  src="/images/log.png"
+                  alt="AG Logo"
+                  fill
+                  sizes="40px"
+                  className="object-contain scale-110"
+                  priority
+                />
+              </div>
+            </div>
+            <span className="text-xl font-semibold text-foreground">Ann</span>
           </Link>
-        ))}
-      </div>
-    </nav>
-  )}
-</header>
+          <nav className="hidden md:flex md:space-x-4">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-foreground/80 hover:text-primary transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+          <div className="relative flex items-center space-x-3">
+            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+              {mounted ? (
+                theme === "dark" ? (
+                  <Sun className="h-5 w-5 text-foreground" />
+                ) : (
+                  <Moon className="h-5 w-5 text-foreground" />
+                )
+              ) : null}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+            <Button variant="ghost" size="icon" onClick={toggleMenu} className="md:hidden">
+              <Menu className="h-6 w-6 text-foreground" />
+            </Button>
+          </div>
+        </div>
+        {isMenuOpen && (
+          <nav className="md:hidden absolute right-0 top-14 bg-background shadow-md rounded-md p-3 border border-border">
+            <div className="flex flex-col space-y-3">
+              {menuItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-foreground/80 hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
+      </header>
 
       <section id="home" className="min-h-screen flex items-center justify-center pt-16 md:pt-0 bg-background">
         <div className="container px-4 flex flex-col md:flex-row items-center justify-center">
@@ -120,7 +113,7 @@ export default function Home() {
             }}
             transition={{
               duration: 5,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
             }}
           >
@@ -138,20 +131,21 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center md:text-left md:flex-1"
           >
-            <h1 className="text-3xl md:text-5xl font-bold mb-10 text-primary">
-              Welcome to My Portfolio
-            </h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-10 text-primary">Welcome to My Portfolio</h1>
 
-            <p 
+            <p
               className="text-lg md:text-xl mb-6 font-serif text-foreground"
               style={{
-                textAlign: 'justify',
-                fontSize: '1.25rem',
-                fontStyle: 'italic',
-                lineHeight: '2.0',
+                textAlign: "justify",
+                fontSize: "1.25rem",
+                fontStyle: "italic",
+                lineHeight: "2.0",
               }}
             >
-              Hello there 👋! I&apos;m Ann Githinji, a passionate web and Android mobile application developer dedicated to crafting innovative, user-friendly digital experiences. Known for my attention to detail and ability to tackle complex challenges, I specialize in Kotlin and Next.js. Let&apos;s build something amazing together—feel free to connect! 🚀
+              Hello there 👋! I&apos;m Ann Githinji, a passionate web and Android mobile application developer dedicated
+              to crafting innovative, user-friendly digital experiences. Known for my attention to detail and ability to
+              tackle complex challenges, I specialize in Kotlin and Next.js. Let&apos;s build something amazing
+              together—feel free to connect! 🚀
             </p>
 
             <div className="flex flex-col sm:flex-row gap-2 justify-center md:justify-start">
