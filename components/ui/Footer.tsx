@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col justify-center items-center">
           <p className="text-white text-center">
-            © {new Date().getFullYear()} Annita.githinji. All rights reserved.
+            © {new Date().getFullYear()} buildwithanie. All rights reserved.
           </p>
         </div>
       </div>

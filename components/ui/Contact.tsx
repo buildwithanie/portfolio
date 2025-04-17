@@ -84,7 +84,7 @@ export default function Contact() {
                 <div className="flex items-center space-x-2">
                   <Mail className="text-primary" />
                   <a href="mailto:buildwithannie@gmail.com" className="text-primary hover:underline">
-                    buildwithannie@gmail.com
+                    buildwithanie@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center space-x-2">
